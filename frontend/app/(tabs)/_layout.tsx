@@ -1,10 +1,9 @@
-import { SymbolView } from 'expo-symbols';
 import { Link, Tabs } from 'expo-router';
-import { Platform, Pressable } from 'react-native';
+import { SymbolView } from 'expo-symbols';
+import { Pressable } from 'react-native';
 
-import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import Colors from '@/constants/Colors';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -15,12 +14,12 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme].tint,
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
+        headerShown: false,
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
+          title: 'Signup',
           tabBarIcon: ({ color }) => (
             <SymbolView
               name={{
@@ -49,9 +48,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="login"
         options={{
-          title: 'Tab Two',
+          title: 'Login',
           tabBarIcon: ({ color }) => (
             <SymbolView
               name={{
