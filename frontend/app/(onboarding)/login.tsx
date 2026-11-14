@@ -1,18 +1,21 @@
 import Password from '@/components/password';
 import { Text, View } from '@/components/Themed';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
+
 import { StyleSheet, TextInput, TouchableOpacity, Platform } from 'react-native';
 const API_URL =
   process.env.EXPO_PUBLIC_API_URL ?? (Platform.OS === 'android' ? 'http://10.0.2.2:3000' : 'http://localhost:3000');
 
 export default function Login() {
+  const router = useRouter();
   const[email, setEmail]=useState("");
   const[password, setPassword]=useState("");
 
   
   const handleLogin = async () => {
     try {
-      const response = await fetch(`${API_URL}/auth/login`, {
+      const response = await fetch(`${API_URL}/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -23,8 +26,7 @@ export default function Login() {
         const message = Array.isArray(data?.message) ? data.message.join('\n') : data?.message;
         throw new Error(message ?? `Login failed (${response.status})`);
       }
-
-      alert('Login successful');
+      router.replace('/(tabs)/home');
     } catch (error) {
       alert(error instanceof Error ? error.message : 'Could not reach the server');
     }
