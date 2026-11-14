@@ -4,13 +4,13 @@ import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { View } from '@/components/Themed';
 import { useState } from 'react';
 
-export default function Password() {
+export default function Password({ value, onChangeText }: { value: string; onChangeText: (text: string) => void }) {
     const [passwordVisible, setPasswordVisible]=useState(false);
   return (
   
  
         <View style={styles.passwordContainer}>
-            <TextInput  style={styles.input} secureTextEntry={!passwordVisible}  />           
+            <TextInput  style={styles.input} value={value} onChangeText={onChangeText} secureTextEntry={!passwordVisible}  />           
             <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
                 <SymbolView name={{
                  ios: passwordVisible ? 'eye.slash' : 'eye',
